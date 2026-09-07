@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LoL Worlds en datos</title>
+<link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMiAzMiI+PHJlY3Qgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiBmaWxsPSIjMDEwQTEzIi8+PHBhdGggZD0iTTcuNSA1aDE3bC0yLjEgMTAuMkMyMS42IDE4LjkgMTkuMiAyMSAxNiAyMXMtNS42LTIuMS02LjQtNS44eiIgZmlsbD0iI0M4QUE2RSIvPjxwYXRoIGQ9Ik03LjUgNWgxN002LjYgMy4yaDE4LjgiIHN0cm9rZT0iI0M4QUE2RSIgc3Ryb2tlLXdpZHRoPSIxLjYiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPjxwYXRoIGQ9Ik0xNSAyMWgydjMuNmgtMnoiIGZpbGw9IiNDOEFBNkUiLz48cGF0aCBkPSJNOS42IDI0LjZoMTIuOGwxIDMuNkg4LjZ6IiBmaWxsPSIjQzhBQTZFIi8+PHBhdGggZD0iTTE2IDguNGwyLjMgMy45LTIuMyAzLjktMi4zLTMuOXoiIGZpbGw9IiMwQUM4QjkiLz48L3N2Zz4=">
+<meta name="description" content="Quince ediciones del Mundial de League of Legends analizadas sobre 1.251 partidas: presencia de campeones, ventaja del lado azul, aceleración del meta y sedes.">
+<meta property="og:title" content="Worlds · 15 ediciones, 1.251 partidas">
+<meta property="og:description" content="Un recorrido por la historia del Mundial de League of Legends, con los datos de partida detrás de cada edición.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://ddragon.leagueoflegends.com" crossorigin>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="image" href="https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Azir_0.jpg">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--void:#010A13;--deep:#0A1428;--gold-dark:#785A28;--gold:#C8AA6E;--gold-lit:#F0E6D2;
+ --teal:#0AC8B9;--teal-dark:#0397AB;--muted:#7A7469;--text:#B6B0A2;--red:#C6404A}
+*{box-sizing:border-box;margin:0;padding:0}
+html{font-size:18px}
+body{background:var(--void);color:var(--text);font-family:'Barlow',-apple-system,'Segoe UI',sans-serif;
+ font-weight:300;line-height:1.62;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+h1,h2,h3,h4{font-family:'Cinzel','Trajan Pro',Georgia,serif;color:var(--gold-lit);letter-spacing:.02em}
+img{display:block;max-width:100%}
+.wrap{max-width:1240px;margin:0 auto;padding:0 32px;position:relative;z-index:2}
+/* hero */
+.hero{position:relative;padding:84px 0 66px;text-align:center;overflow:hidden;border-bottom:1px solid rgba(120,90,40,.4)}
+.hero .bg{position:absolute;inset:0;background-size:cover;background-position:50% 22%;opacity:.32;filter:saturate(.75)}
+.hero .veil{position:absolute;inset:0;background:linear-gradient(180deg,rgba(1,10,19,.55),rgba(1,10,19,.82) 55%,var(--void)),
+ radial-gradient(ellipse 860px 440px at 50% 40%,transparent,rgba(1,10,19,.9) 78%)}
+.cup{width:94px;margin:0 auto 20px;filter:drop-shadow(0 0 24px rgba(200,170,110,.5))}
+.hero h1{font-size:clamp(3.4rem,12.5vw,8.4rem);font-weight:700;line-height:.9;letter-spacing:.06em;
+ background:linear-gradient(175deg,#FFF8E7 6%,#F0E6D2 26%,#C8AA6E 55%,#785A28 96%);
+ -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.hero .sub{font-size:.92rem;letter-spacing:.34em;color:var(--teal);margin-bottom:8px}
+.hero .lead{max-width:60ch;margin:26px auto 0;font-size:1.1rem}
+.rule{width:190px;height:1px;margin:32px auto;background:linear-gradient(90deg,transparent,var(--gold),transparent);position:relative}
+.rule::after{content:"";position:absolute;left:50%;top:-3.5px;width:7px;height:7px;transform:translateX(-50%) rotate(45deg);background:var(--gold)}
+.count{display:flex;justify-content:center;gap:14px;flex-wrap:wrap}
+.count>div{min-width:88px;padding:10px 6px;border:1px solid rgba(120,90,40,.4);background:rgba(1,10,19,.5)}
+.count b{display:block;font-family:'Cinzel',Georgia,serif;font-size:2.6rem;color:var(--gold-lit);line-height:1;
+ font-variant-numeric:tabular-nums}
+.count .sec b{color:var(--teal)}
+.count span{font-size:.66rem;letter-spacing:.22em;color:var(--muted)}
+/* estructura */
+section{padding:76px 0;border-bottom:1px solid rgba(120,90,40,.22)}
+h2{font-size:1.95rem;font-weight:500;margin-bottom:8px}
+.note{font-size:1.04rem;color:#A8A193;margin-bottom:38px;max-width:86ch}
+.hd{display:grid;grid-template-columns:minmax(230px,.85fr) 2fr;gap:48px;align-items:start;margin-bottom:42px}
+.hd h2{margin:0}
+.bstat{display:flex;flex-direction:column;gap:24px}
+.bstat div{border-left:2px solid var(--gold-dark);padding-left:18px}
+.bstat b{display:block;font-family:'Cinzel',Georgia,serif;font-size:1.9rem;color:var(--gold-lit);line-height:1.1}
+.bstat span{font-size:.92rem;color:#A8A193}.hd .note{margin:0;max-width:none;padding-top:.42rem}
+.legends{display:grid;grid-template-columns:repeat(auto-fit,minmax(268px,1fr));gap:1px;background:rgba(120,90,40,.3)}
+.lg{background:var(--void);padding:30px 26px;transition:background .25s}
+.lg:hover{background:#060F1C}
+.lg .y{font-family:'Cinzel',Georgia,serif;font-size:.86rem;color:var(--teal);letter-spacing:.16em}
+.lg h3{font-size:1rem;font-weight:500;margin:8px 0 16px;line-height:1.42}
+.lg b{display:block;font-family:'Cinzel',Georgia,serif;font-size:2.4rem;color:var(--gold);line-height:1}
+.lg .u{font-size:.78rem;color:var(--muted);margin-bottom:12px}
+.lg p{font-size:.9rem}
+.byline{margin-top:26px;padding-top:20px;border-top:1px solid rgba(120,90,40,.22);
+ font-size:.82rem;color:var(--muted);display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.byline b{font-family:'Cinzel',Georgia,serif;color:var(--gold);letter-spacing:.06em}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1px;background:rgba(120,90,40,.3)}
+.kpi{background:var(--void);padding:30px 26px;transition:background .25s}
+.kpi:hover{background:#060F1C}
+.kpi b{display:block;font-family:'Cinzel',Georgia,serif;font-size:2.9rem;color:var(--gold);line-height:1.1}
+.kpi span{font-size:.9rem;color:var(--text)}
+.kpi em{display:block;font-style:normal;font-size:.8rem;color:var(--muted);margin-top:5px}
+/* timeline */
+.rail{display:flex;overflow-x:auto;padding-bottom:14px;scrollbar-width:thin;scrollbar-color:var(--gold-dark) transparent}
+.rail::-webkit-scrollbar{height:3px}.rail::-webkit-scrollbar-thumb{background:var(--gold-dark)}
+.yr{flex:1 0 auto;min-width:74px;padding:16px 6px 20px;background:none;border:none;cursor:pointer;
+ font-family:'Cinzel',Georgia,serif;font-size:1.05rem;color:var(--muted);
+ border-bottom:2px solid rgba(120,90,40,.3);transition:color .18s,border-color .18s,background .18s}
+.yr:hover{color:var(--gold);background:rgba(200,170,110,.07)}
+.yr.pre{font-style:italic}
+.yr[aria-selected="true"]{color:var(--gold-lit);border-bottom-color:var(--teal)}
+.yr:focus-visible{outline:2px solid var(--teal);outline-offset:-2px}
+.edition{position:relative;margin-top:32px;padding:42px;border:1px solid var(--gold-dark);overflow:hidden;min-height:330px;
+ background:linear-gradient(150deg,rgba(10,20,40,.92),rgba(1,10,19,.94))}
+.edition .art{position:absolute;top:0;right:0;width:46%;height:100%;background-size:cover;background-position:52% 18%;
+ opacity:.28;-webkit-mask-image:linear-gradient(90deg,transparent,#000 62%);mask-image:linear-gradient(90deg,transparent,#000 62%)}
+.edition::before,.edition::after{content:"";position:absolute;width:18px;height:18px;border:1px solid var(--gold);z-index:3}
+.edition::before{top:-1px;left:-1px;border-right:0;border-bottom:0}
+.edition::after{bottom:-1px;right:-1px;border-left:0;border-top:0}
+.ed-in{position:relative;z-index:2;animation:fade .45s ease}
+@keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.ed-top{display:flex;justify-content:space-between;align-items:flex-start;gap:24px;flex-wrap:wrap}
+.ed-id{display:flex;align-items:center;gap:20px}
+.crest{width:76px;height:76px;flex:0 0 76px;border:1px solid var(--gold);border-radius:50%;overflow:hidden;
+ background:radial-gradient(circle at 50% 42%,#F5EFE2,#CBB489 72%,#9C7C42);
+ display:flex;align-items:center;justify-content:center;box-shadow:0 0 18px rgba(200,170,110,.28)}
+.crest img{width:100%;height:100%;object-fit:contain;padding:9px}
+.crest span{font-family:'Cinzel',Georgia,serif;font-size:1.4rem;color:#3A2B10;font-weight:700}
+.crest.sm{width:46px;height:46px;flex:0 0 46px}.crest.sm img{padding:5px}.crest.sm span{font-size:.85rem}
+.ed-champ{font-size:2.35rem;font-weight:700;line-height:1.14;font-family:'Cinzel',Georgia,serif;color:var(--gold-lit)}
+.ed-year{font-family:'Cinzel',Georgia,serif;font-size:3.8rem;color:rgba(200,170,110,.32);line-height:1}
+.badge{display:inline-block;margin-top:9px;padding:3px 13px;border:1px solid var(--teal-dark);color:var(--teal);font-size:.74rem;letter-spacing:.16em}
+.ed-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(165px,1fr));gap:28px;margin-top:38px;padding-top:28px;border-top:1px solid rgba(120,90,40,.32)}
+.ed-grid dt{font-size:.72rem;letter-spacing:.16em;color:var(--muted);margin-bottom:6px}
+.ed-grid dd{font-size:1.08rem;color:var(--gold-lit)}
+/* mapa */
+#map{width:100%;height:auto;display:block}
+#map .land{fill:#0C1727;stroke:#16283F;stroke-width:.4;transition:fill .2s}
+#map .hl{stroke:#C8AA6E;stroke-width:.8;cursor:pointer}
+#map .hl:hover{fill-opacity:1!important}
+#map .city{fill:var(--teal);filter:drop-shadow(0 0 7px rgba(10,200,185,.95));transition:r .18s}
+#map .hit{fill:transparent;cursor:pointer}
+#map .hit:hover+.city,#map .city.big{r:7}
+#map .city26{fill:var(--gold-lit);filter:drop-shadow(0 0 12px rgba(240,230,210,.95))}
+#map .grat{fill:none;stroke:rgba(120,90,40,.16);stroke-width:.5}
+.legend{display:flex;gap:28px;flex-wrap:wrap;font-size:.92rem;margin-top:20px;color:var(--text)}
+.legend i{display:inline-block;width:11px;height:11px;margin-right:8px;vertical-align:middle}
+.mapfall{padding:40px;border:1px dashed var(--gold-dark);text-align:center;color:var(--muted)}
+/* tooltip */
+.tip{position:fixed;z-index:99;pointer-events:none;opacity:0;transform:translate(-50%,-118%) scale(.96);
+ transition:opacity .12s ease,transform .12s ease;background:rgba(2,12,22,.97);border:1px solid var(--gold);
+ padding:11px 15px;max-width:280px;box-shadow:0 8px 30px rgba(0,0,0,.7)}
+.tip.on{opacity:1;transform:translate(-50%,-118%) scale(1)}
+.tip b{display:block;font-family:'Cinzel',Georgia,serif;color:var(--gold-lit);font-size:1rem;line-height:1.3}
+.tip small{display:block;font-size:.82rem;color:var(--text);margin-top:3px}
+.tip em{font-style:normal;color:var(--teal)}
+/* carrusel */
+.carou{border:1px solid var(--gold-dark);background:linear-gradient(150deg,rgba(10,20,40,.9),rgba(1,10,19,.94));padding:30px 32px 34px}
+.carou-head{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-bottom:26px}
+.carou-head h3{font-size:2rem;font-weight:700;font-variant-numeric:tabular-nums}
+.carou-head .gn{font-size:.82rem;color:var(--muted);letter-spacing:.1em}
+.nav{display:flex;gap:9px}
+.nav button{width:44px;height:44px;background:none;border:1px solid var(--gold-dark);color:var(--gold);
+ cursor:pointer;font-size:1.3rem;line-height:1;transition:background .18s,color .18s,border-color .18s}
+.nav button:hover{background:rgba(200,170,110,.16);color:var(--gold-lit);border-color:var(--gold)}
+.nav button:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+.trio{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.trio.swap{animation:slide .38s ease}
+@keyframes slide{from{opacity:0;transform:translateX(22px)}to{opacity:1;transform:none}}
+.ch{border:1px solid rgba(120,90,40,.5);overflow:hidden;background:var(--void);display:flex;flex-direction:column;
+ transition:border-color .22s,transform .22s}
+.ch:hover{border-color:var(--gold);transform:translateY(-3px)}
+.ch .pic{position:relative;aspect-ratio:308/400;background:linear-gradient(160deg,#0A1428,#1E2328);overflow:hidden}
+.ch .pic img{width:100%;height:100%;object-fit:cover;object-position:50% 12%;opacity:0;transition:opacity .5s}
+.ch .pic img.on{opacity:1}
+.ch .body{padding:15px 16px 17px;min-height:132px;display:flex;flex-direction:column}
+.ch h4{font-size:1.08rem;font-weight:500}
+.ch .pc{font-family:'Cinzel',Georgia,serif;font-size:1.85rem;color:var(--gold);line-height:1.2}
+.ch p{font-size:.8rem;color:var(--muted);margin-top:3px}
+.ch .tag{display:inline-block;margin-top:auto;padding-top:9px;font-size:.68rem;letter-spacing:.12em;color:var(--red)}
+.ch .tag i{font-style:normal;border:1px solid rgba(198,64,74,.55);padding:2px 8px}
+.dots{display:flex;gap:7px;justify-content:center;margin-top:26px;flex-wrap:wrap}
+.dots button{width:9px;height:9px;padding:0;border:none;background:rgba(120,90,40,.5);cursor:pointer;transform:rotate(45deg);transition:background .2s}
+.dots button:hover{background:var(--gold)}
+.dots button[aria-current="true"]{background:var(--gold-lit)}
+/* grilla de presencia */
+.pres{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:14px}
+.tile{position:relative;aspect-ratio:3/4;overflow:hidden;border:1px solid rgba(120,90,40,.45);
+ transition:border-color .22s,transform .22s;cursor:default}
+.tile:hover{border-color:var(--gold);transform:translateY(-3px)}
+.tile img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 10%;
+ opacity:0;transition:opacity .5s,transform .5s}
+.tile img.on{opacity:.92}.tile:hover img{transform:scale(1.06)}
+.tile .lay{position:absolute;inset:0;background:linear-gradient(180deg,transparent 34%,rgba(1,10,19,.92) 88%)}
+.tile .txt{position:absolute;left:13px;right:13px;bottom:12px}
+.tile .txt b{display:block;font-family:'Cinzel',Georgia,serif;font-size:2rem;color:var(--gold-lit);line-height:1}
+.tile .txt span{font-size:.9rem;color:var(--gold)}
+.tile .txt small{display:block;font-size:.72rem;color:var(--muted)}
+.tile .rk{position:absolute;top:9px;left:11px;font-family:'Cinzel',Georgia,serif;font-size:.86rem;
+ color:var(--gold-lit);background:rgba(1,10,19,.8);border:1px solid var(--gold-dark);padding:1px 8px;z-index:2}
+/* objetivos */
+.objs{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:16px}
+.obj{border:1px solid rgba(120,90,40,.45);padding:26px 22px;text-align:center;background:linear-gradient(170deg,rgba(10,20,40,.7),transparent);
+ transition:border-color .22s,background .22s}
+.obj:hover{border-color:var(--gold);background:linear-gradient(170deg,rgba(200,170,110,.1),transparent)}
+.obj .ring{position:relative;width:118px;height:118px;margin:0 auto 16px}
+.obj .ring svg{transform:rotate(-90deg)}
+.obj .ring .ic{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
+.obj .ring .ic svg{transform:none;width:38px;height:38px}
+.obj b{display:block;font-family:'Cinzel',Georgia,serif;font-size:1.85rem;color:var(--gold-lit);line-height:1.1}
+.obj h3{font-size:1rem;font-weight:500;margin-top:7px}
+.obj p{font-size:.78rem;color:var(--muted);margin-top:5px}
+/* rankings */
+.rank{display:flex;flex-direction:column;gap:2px}
+.row{display:grid;grid-template-columns:34px 1fr 92px;align-items:center;gap:16px;padding:13px 14px;
+ border:1px solid transparent;border-bottom:1px solid rgba(120,90,40,.16);transition:background .2s,border-color .2s}
+.row:hover{background:rgba(200,170,110,.08);border-color:rgba(200,170,110,.4)}
+.row .pos{font-family:'Cinzel',Georgia,serif;color:var(--gold-dark);font-size:1.05rem}
+.row:hover .pos{color:var(--gold)}
+.row .who{display:flex;align-items:center;gap:14px;min-width:0}
+.row .nm{font-size:1.02rem;color:var(--gold-lit);font-family:'Cinzel',Georgia,serif}
+.row .mt{font-size:.76rem;color:var(--muted)}
+.row .val{text-align:right}
+.row .val b{font-family:'Cinzel',Georgia,serif;font-size:1.4rem;color:var(--gold);display:block;line-height:1.1}
+.row .val small{font-size:.7rem;color:var(--muted)}
+.row .mini{height:3px;background:rgba(120,90,40,.2);margin-top:6px}
+.row .mini i{display:block;height:100%;background:linear-gradient(90deg,var(--gold-dark),var(--gold));width:0;transition:width .9s cubic-bezier(.2,.7,.3,1)}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:56px}
+.rec{border-left:2px solid var(--gold-dark);padding-left:22px;margin-bottom:28px;transition:border-color .2s}
+.rec:hover{border-color:var(--gold)}
+.rec b{display:block;font-family:'Cinzel',Georgia,serif;font-size:2.5rem;color:var(--gold-lit);line-height:1.1}
+.rec span{font-size:.94rem}
+.trio3{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(120,90,40,.3)}
+.era{background:var(--void);padding:30px 26px;transition:background .25s}
+.era:hover{background:#060F1C}
+.era .y{font-family:'Cinzel',Georgia,serif;font-size:2.7rem;color:rgba(200,170,110,.42);line-height:1}
+.era h3{font-size:1.12rem;font-weight:500;margin:7px 0 11px}
+.era p{font-size:.94rem}
+.next{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1px;background:rgba(10,200,185,.28)}
+.stage{background:var(--void);padding:28px;transition:background .25s}
+.stage:hover{background:#03151C}
+.stage h3{font-size:1.1rem;font-weight:500;margin-bottom:7px}
+.stage p{font-size:.94rem}
+.stage .when{color:var(--teal);font-size:.82rem;letter-spacing:.1em;margin-bottom:13px}
+.ctabox{text-align:center;margin-top:38px}
+.cta{display:inline-block;padding:16px 34px;border:1px solid var(--gold);color:var(--gold-lit);
+ text-decoration:none;font-family:'Cinzel',Georgia,serif;letter-spacing:.12em;font-size:.95rem;transition:background .2s,box-shadow .2s}
+.close{margin-top:40px;padding:22px 0 22px 26px;border-left:2px solid var(--gold-dark);font-size:1.08rem;max-width:none;color:var(--text)}
+.cta:hover{background:rgba(200,170,110,.16);box-shadow:0 0 24px rgba(200,170,110,.25)}
+footer{padding:32px 0 40px;border-top:1px solid rgba(120,90,40,.22)}
+footer .cols{display:grid;grid-template-columns:1.1fr 1fr .8fr;gap:40px;font-size:.76rem;line-height:1.55;color:var(--muted)}
+footer .cols b{display:block;font-family:'Cinzel',Georgia,serif;color:var(--gold-dark);font-size:.72rem;letter-spacing:.14em;margin-bottom:5px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+@media(max-width:900px){html{font-size:17px}.split,.trio3,footer .cols,.hd{grid-template-columns:1fr;gap:32px}.hd{gap:10px;margin-bottom:32px}
+ .trio3{gap:1px}.trio{grid-template-columns:1fr}}
+@media(max-width:620px){html{font-size:16px}.wrap{padding:0 20px}.edition{padding:28px 22px}
+ .edition .art{width:100%;opacity:.15;-webkit-mask-image:none;mask-image:none}.carou{padding:22px 18px 26px}}
+</style></head><body>
+
+<header class="hero"><div class="bg" id="heroBg"></div><div class="veil"></div><div class="wrap">
+  <svg class="cup" viewBox="0 0 100 150" fill="none" aria-hidden="true">
+    <defs><linearGradient id="cg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#F0E6D2"/>
+      <stop offset="48%" stop-color="#C8AA6E"/><stop offset="100%" stop-color="#785A28"/></linearGradient></defs>
+    <path d="M22 14h56l-4 34c-2 17-11 27-24 27S28 65 26 48z" stroke="url(#cg)" stroke-width="2.4"/>
+    <path d="M22 14h56M18 8h64" stroke="url(#cg)" stroke-width="2.4" stroke-linecap="round"/>
+    <path d="M22 22C10 24 6 32 8 41c2 9 9 13 16 13M78 22c12 2 16 10 14 19-2 9-9 13-16 13" stroke="url(#cg)" stroke-width="2.2"/>
+    <path d="M50 75v27M34 102h32l5 12H29z" stroke="url(#cg)" stroke-width="2.4" stroke-linejoin="round"/>
+    <path d="M24 114h52l4 12H20z" stroke="url(#cg)" stroke-width="2.4" stroke-linejoin="round"/>
+    <path d="M50 30l7 12-7 12-7-12z" fill="#0AC8B9" opacity=".7"/></svg>
+  <div class="sub">Campeonato Mundial · League of Legends</div><h1>WORLDS</h1><div class="rule"></div>
+  <div class="count"><div><b id="dd">—</b><span>DÍAS</span></div><div><b id="hh">—</b><span>HORAS</span></div>
+   <div><b id="mm">—</b><span>MINUTOS</span></div><div class="sec"><b id="ss">—</b><span>SEGUNDOS</span></div></div>
+  <p class="lead">Quince ediciones, 1.251 partidas registradas y una decimosexta que arranca el 15 de octubre de 2026 en Los Ángeles.</p>
+</div></header>
+
+<section><div class="wrap"><div class="kpis">
+  <div class="kpi"><b>1.251</b><span>partidas de Worlds analizadas</span><em>2014 – 2025, Oracle's Elixir</em></div>
+  <div class="kpi"><b>6</b><span>títulos de T1 / SK Telecom T1</span><em>la mitad de todas las ediciones desde 2013</em></div>
+  <div class="kpi"><b>10</b><span>de 15 copas para Corea</span><em>incluyendo las últimas cuatro</em></div>
+  <div class="kpi"><b>19</b><span>equipos clasifican en 2026</span><em>tres por LCK, LPL, LEC, LCS y LCP</em></div>
+</div></div></section>
+
+<section><div class="wrap"><div class="hd">
+  <h2>Cada final, año por año</h2>
+  <p class="note">Elegí una edición para ver quién levantó la copa, contra quién y dónde. Los tres primeros años van en itálica: existen en los registros, pero no en el dataset de partidas.</p>
+  </div>
+  <div class="rail" role="tablist" aria-label="Ediciones de Worlds" id="rail"></div>
+  <div class="edition" id="ed" role="tabpanel" aria-live="polite"></div>
+</div></section>
+
+<section><div class="wrap"><div class="hd">
+  <h2>Los tres años sin datos de partida</h2>
+  <p class="note">Oracle's Elixir arranca en 2014. De las tres primeras ediciones se sabe quién ganó, contra quién y dónde, pero no lo que pasó dentro de la Grieta: nadie registró duraciones, elecciones ni objetivos partida por partida.</p>
+  </div>
+  <div class="trio3">
+    <div class="era"><div class="y">2011</div><h3>Ocho equipos en una feria</h3>
+      <p>El primer Mundial se jugó dentro de la DreamHack de Jönköping, en Suecia, repartiendo cien mil dólares entre ocho equipos. Fnatic ganó la única copa que Europa tiene hasta hoy.</p></div>
+    <div class="era"><div class="y">2012</div><h3>El salto a un estadio</h3>
+      <p>Riot mudó el torneo al Galen Center de Los Ángeles y multiplicó el premio por veinte, hasta dos millones. Taipei Assassins dio el golpe: la única copa de Taiwán.</p></div>
+    <div class="era"><div class="y">2013</div><h3>Empieza la era Faker</h3>
+      <p>El Staples Center agotó las entradas y SK Telecom T1 barrió la final 3–0. Era el primero de los seis títulos que la organización acumularía en trece años.</p></div>
+  </div>
+</div></section>
+
+<section><div class="wrap"><div class="hd">
+  <h2>El Mundial dio quince vueltas al mundo</h2>
+  <p class="note">Cada punto es la sede de una final; pasá el mouse para ver qué se jugó ahí y quién ganó. En dorado, los países de los equipos que levantaron la copa.</p>
+  </div>
+  <div id="mapbox"><svg id="map" viewBox="0 0 960 430" role="img" aria-label="Mapa de sedes de finales de Worlds"></svg></div>
+  <div class="legend">
+    <span><i style="background:var(--teal);border-radius:50%"></i>Sede de una final</span>
+    <span><i style="background:var(--gold-lit);border-radius:50%"></i>Brooklyn 2026</span>
+    <span><i style="background:#C8AA6E"></i>País del equipo campeón</span></div>
+</div></section>
+
+<section><div class="wrap"><div class="hd">
+  <h2>Los campeones que nadie dejó pasar</h2>
+  <p class="note">Los tres más presentes de cada edición, contando partidas donde fueron elegidos o baneados. Los marcados como ban obligatorio llegaron altísimo sin llegar a jugarse: el rival prefería gastar un veto antes que enfrentarlos.</p>
+  </div>
+  <div class="carou">
+    <div class="carou-head">
+      <div><h3 id="cy">2025</h3><div class="gn" id="cg2">— partidas</div></div>
+      <div class="nav"><button id="prev" aria-label="Edición anterior">‹</button><button id="next" aria-label="Edición siguiente">›</button></div>
+    </div>
+    <div class="trio" id="trio"></div>
+    <div class="dots" id="dots"></div>
+  </div>
+</div></section>
+
+<section><div class="wrap"><div class="hd">
+  <h2>La presencia total, 2014 a 2025</h2>
+  <p class="note">Los doce campeones que más aparecieron en las 1.251 partidas, contando elegidos más baneados. Pasá el mouse para ver el desglose y el winrate real.</p>
+  </div>
+  <div class="pres" id="pres"></div>
+</div></section>
+
+<section><div class="wrap"><div class="hd">
+  <h2>Qué objetivo decide la partida</h2>
+  <p class="note">Winrate del equipo que consigue cada objetivo primero. La primera sangre y el primer dragón apenas mueven la aguja; el primer barón es prácticamente la partida.</p>
+  </div>
+  <div class="objs" id="objs"></div>
+</div></section>
+
+<section><div class="wrap"><div class="hd">
+  <h2>La aceleración del meta</h2>
+  <p class="note">Duración promedio de partida por edición. De 38,5 minutos en 2016 a 31 en 2023: siete minutos menos de juego en siete años.</p>
+  </div>
+  <svg id="len" viewBox="0 0 900 300" style="width:100%;height:auto"></svg>
+</div></section>
+
+<section><div class="wrap"><div class="hd">
+  <h2>La ventaja del lado azul</h2>
+  <p class="note">Cuánto ganó el lado azul en cada edición. La línea blanca marca el 50 %, que es lo que daría si el lado del mapa no influyera en nada. Diez de las doce quedaron por arriba.</p>
+  </div>
+  <div class="split" style="grid-template-columns:2.1fr 1fr;align-items:center">
+  <svg id="blue" viewBox="0 0 780 300" style="width:100%;height:auto"></svg>
+  <div class="bstat">
+    <div><b>54,5 %</b><span>de victorias del lado azul sobre las 1.251 partidas</span></div>
+    <div><b>10 de 12</b><span>ediciones quedaron por encima del 50 %</span></div>
+    <div><b>p = 0,039</b><span>probabilidad de ver una racha así por azar, con un test de signos</span></div>
+  </div></div>
+</div></section>
+
+<section><div class="wrap"><div class="split">
+  <div><h2>Más kills acumuladas</h2><p class="note">Suma histórica de asesinatos en Worlds.</p><div class="rank" id="tp"></div></div>
+  <div><h2>Equipos más ganadores</h2><p class="note">Mínimo 30 partidas disputadas.</p><div class="rank" id="tt"></div></div>
+</div></div></section>
+
+<section><div class="wrap"><div class="split">
+  <div><h2>Los extremos</h2><p class="note">Las dos partidas más lejos del promedio, y el promedio mismo.</p><div id="recs"></div></div>
+  <div><h2>El premio, edición por edición</h2><p class="note">Los picos de 2016 a 2018 vienen del crowdfunding con skins. Riot lo discontinuó y el pozo volvió a la base fija, hasta el salto de 2025.</p>
+   <svg id="pool" viewBox="0 0 620 300" style="width:100%;height:auto"></svg></div>
+</div></div></section>
+
+<section><div class="wrap"><div class="hd">
+  <h2>Las que se recuerdan</h2>
+  <p class="note">Cuatro series que el dataset respalda con un número y no con nostalgia: la más larga, la mayor remontada de oro y dos finales que se fueron al quinto mapa.</p>
+  </div>
+  <div class="legends" id="legends"></div>
+</div></section>
+
+<section><div class="wrap"><div class="hd">
+  <h2>Worlds 2026</h2>
+  <p class="note">Vuelve a Norteamérica por primera vez desde 2022, repartido en tres ciudades.</p>
+  </div>
+  <div class="next">
+    <div class="stage"><div class="when">15 – 18 OCT</div><h3>Play-In</h3><p>Riot Games Arena, Los Ángeles</p></div>
+    <div class="stage"><div class="when">23 – 31 OCT</div><h3>Fase suiza</h3><p>Credit Union of Texas Event Center, Allen</p></div>
+    <div class="stage"><div class="when">3 – 8 NOV</div><h3>Eliminatorias</h3><p>Cuartos y semis, también en Allen</p></div>
+    <div class="stage"><div class="when">14 NOV</div><h3>Gran final</h3><p>Barclays Center, Brooklyn</p></div>
+  </div>
+  <p class="close">T1 llega como tricampeón defensor, buscando el cuarto seguido y el séptimo de su historia. Se reparten diecinueve plazas: tres para cada una de las cinco ligas mayores, dos para el CBLOL y las dos últimas se definen en el MSI de Daejeon.</p>
+  <div class="ctabox"><a class="cta" href="https://lolesports.com" target="_blank" rel="noopener">Seguir el torneo en LoL Esports</a></div>
+</div></section>
+
+<footer><div class="wrap"><div class="cols">
+  <p><b>MÉTODO</b>1.251 partidas de Worlds 2014–2025 de Oracle's Elixir. Se excluyeron 90 partidas de clasificatorias regionales mal etiquetadas. Las ediciones 2011–2013 no entran en ningún cálculo. Premios aproximados.</p>
+  <p><b>FUENTES</b>Arte de campeones: Data Dragon. Escudos: Leaguepedia. Mapa: Natural Earth vía world-atlas.</p>
+  <p><b>AVISO</b>Proyecto personal sin fines comerciales, no afiliado a Riot Games. League of Legends es marca de Riot Games, Inc.</p>
+</div>
+<div class="byline"><span><b>Maximiliano Navarro</b> · análisis y diseño</span><span>Construido en conversación con Claude, de Anthropic</span></div>
+</div></footer>
+
+<script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/topojson-client@3/dist/topojson-client.min.js"></script>
+<script>
+const S={"games": 1251, "length": [{"y": 2014, "n": 78, "min": 36.1}, {"y": 2015, "n": 73, "min": 36.0}, {"y": 2016, "n": 77, "min": 38.5}, {"y": 2017, "n": 119, "min": 35.1}, {"y": 2018, "n": 119, "min": 32.2}, {"y": 2019, "n": 120, "min": 33.3}, {"y": 2020, "n": 114, "min": 32.2}, {"y": 2021, "n": 121, "min": 33.0}, {"y": 2022, "n": 127, "min": 31.5}, {"y": 2023, "n": 113, "min": 31.4}, {"y": 2024, "n": 106, "min": 33.0}, {"y": 2025, "n": 84, "min": 32.8}], "blue": [{"y": 2014, "n": 78, "wr": 59.0, "ci": [47.9, 69.2]}, {"y": 2015, "n": 73, "wr": 58.9, "ci": [47.4, 69.5]}, {"y": 2016, "n": 77, "wr": 54.5, "ci": [43.5, 65.2]}, {"y": 2017, "n": 119, "wr": 56.3, "ci": [47.3, 64.9]}, {"y": 2018, "n": 119, "wr": 57.1, "ci": [48.2, 65.7]}, {"y": 2019, "n": 120, "wr": 52.5, "ci": [43.6, 61.2]}, {"y": 2020, "n": 114, "wr": 50.9, "ci": [41.8, 59.9]}, {"y": 2021, "n": 121, "wr": 48.8, "ci": [40.0, 57.6]}, {"y": 2022, "n": 127, "wr": 54.3, "ci": [45.7, 62.7]}, {"y": 2023, "n": 113, "wr": 55.8, "ci": [46.6, 64.6]}, {"y": 2024, "n": 106, "wr": 58.5, "ci": [49.0, 67.4]}, {"y": 2025, "n": 84, "wr": 50.0, "ci": [39.5, 60.5]}], "blue_all": {"n": 1251, "wr": 54.5, "ci": [51.7, 57.3]}, "champs": [{"c": "Syndra", "pct": 42.1, "pick": 231, "ban": 296, "wr": 46.8}, {"c": "Rakan", "pct": 41.4, "pick": 290, "ban": 228, "wr": 55.9}, {"c": "Alistar", "pct": 39.3, "pick": 249, "ban": 243, "wr": 47.8}, {"c": "Lee Sin", "pct": 38.4, "pick": 304, "ban": 176, "wr": 51.3}, {"c": "Lucian", "pct": 36.5, "pick": 205, "ban": 252, "wr": 47.8}, {"c": "Orianna", "pct": 36.5, "pick": 238, "ban": 219, "wr": 51.7}, {"c": "Xayah", "pct": 35.7, "pick": 228, "ban": 218, "wr": 56.1}, {"c": "Ryze", "pct": 34.5, "pick": 219, "ban": 213, "wr": 51.6}, {"c": "Kalista", "pct": 34.4, "pick": 115, "ban": 315, "wr": 50.4}, {"c": "Jarvan IV", "pct": 32.9, "pick": 221, "ban": 191, "wr": 47.5}, {"c": "Kai'Sa", "pct": 32.9, "pick": 283, "ban": 128, "wr": 50.2}, {"c": "LeBlanc", "pct": 31.7, "pick": 130, "ban": 267, "wr": 56.2}], "byyear": [{"y": 2014, "games": 78, "top": [{"c": "Alistar", "pct": 100.0, "pick": 5, "ban": 73, "wr": 80.0}, {"c": "Zilean", "pct": 96.2, "pick": 13, "ban": 62, "wr": 46.2}, {"c": "Lee Sin", "pct": 92.3, "pick": 43, "ban": 29, "wr": 55.8}]}, {"y": 2015, "games": 73, "top": [{"c": "Gangplank", "pct": 100.0, "pick": 4, "ban": 69, "wr": 100.0}, {"c": "Mordekaiser", "pct": 98.6, "pick": 4, "ban": 68, "wr": 100.0}, {"c": "Elise", "pct": 97.3, "pick": 39, "ban": 32, "wr": 66.7}]}, {"y": 2016, "games": 77, "top": [{"c": "Nidalee", "pct": 100.0, "pick": 11, "ban": 66, "wr": 72.7}, {"c": "Syndra", "pct": 97.4, "pick": 16, "ban": 59, "wr": 62.5}, {"c": "Olaf", "pct": 76.6, "pick": 36, "ban": 23, "wr": 50.0}]}, {"y": 2017, "games": 119, "top": [{"c": "Kalista", "pct": 100.0, "pick": 5, "ban": 114, "wr": 80.0}, {"c": "Sejuani", "pct": 98.3, "pick": 60, "ban": 57, "wr": 48.3}, {"c": "Jarvan IV", "pct": 97.5, "pick": 55, "ban": 61, "wr": 54.5}]}, {"y": 2018, "games": 119, "top": [{"c": "Aatrox", "pct": 99.2, "pick": 42, "ban": 76, "wr": 47.6}, {"c": "Urgot", "pct": 96.6, "pick": 47, "ban": 68, "wr": 55.3}, {"c": "Alistar", "pct": 95.0, "pick": 50, "ban": 63, "wr": 56.0}]}, {"y": 2019, "games": 120, "top": [{"c": "Pantheon", "pct": 100.0, "pick": 1, "ban": 119, "wr": 100.0}, {"c": "Qiyana", "pct": 90.8, "pick": 23, "ban": 86, "wr": 56.5}, {"c": "Xayah", "pct": 85.0, "pick": 57, "ban": 45, "wr": 61.4}]}, {"y": 2020, "games": 114, "top": [{"c": "Ornn", "pct": 89.5, "pick": 40, "ban": 62, "wr": 60.0}, {"c": "Nidalee", "pct": 89.5, "pick": 31, "ban": 71, "wr": 58.1}, {"c": "Graves", "pct": 86.8, "pick": 69, "ban": 30, "wr": 50.7}]}, {"y": 2021, "games": 121, "top": [{"c": "Lee Sin", "pct": 97.5, "pick": 58, "ban": 60, "wr": 56.9}, {"c": "LeBlanc", "pct": 82.6, "pick": 29, "ban": 71, "wr": 51.7}, {"c": "Lucian", "pct": 82.6, "pick": 34, "ban": 66, "wr": 52.9}]}, {"y": 2022, "games": 127, "top": [{"c": "Aatrox", "pct": 98.4, "pick": 46, "ban": 79, "wr": 63.0}, {"c": "Sejuani", "pct": 83.5, "pick": 49, "ban": 57, "wr": 49.0}, {"c": "Sylas", "pct": 78.0, "pick": 50, "ban": 49, "wr": 66.0}]}, {"y": 2023, "games": 113, "top": [{"c": "Orianna", "pct": 93.8, "pick": 43, "ban": 63, "wr": 60.5}, {"c": "Xayah", "pct": 91.2, "pick": 47, "ban": 56, "wr": 66.0}, {"c": "Maokai", "pct": 84.1, "pick": 34, "ban": 61, "wr": 50.0}]}, {"y": 2024, "games": 106, "top": [{"c": "Yone", "pct": 93.4, "pick": 36, "ban": 63, "wr": 66.7}, {"c": "Aurora", "pct": 90.6, "pick": 19, "ban": 77, "wr": 63.2}, {"c": "Skarner", "pct": 89.6, "pick": 39, "ban": 56, "wr": 71.8}]}, {"y": 2025, "games": 84, "top": [{"c": "Yunara", "pct": 88.1, "pick": 16, "ban": 58, "wr": 68.8}, {"c": "Azir", "pct": 82.1, "pick": 14, "ban": 55, "wr": 50.0}, {"c": "Orianna", "pct": 78.6, "pick": 20, "ban": 46, "wr": 60.0}]}], "obj": [{"k": "Primera sangre", "wr": 59.5, "n": 1251}, {"k": "Primer dragón", "wr": 59.7, "n": 1250}, {"k": "Primera torre", "wr": 67.7, "n": 1250}, {"k": "Primer barón", "wr": 86.6, "n": 1180}], "rec": {"long": {"y": 2014, "min": 71.6, "w": "Oh My God", "l": "Fnatic"}, "short": {"y": 2020, "min": 19.0, "w": "Dplus Kia", "l": "G2 Esports"}, "avg": 33.5}, "players": [{"n": "Faker", "k": 536, "g": 153, "kda": 4.3}, {"n": "Ruler", "k": 417, "g": 106, "kda": 5.51}, {"n": "Deft", "k": 405, "g": 104, "kda": 4.75}, {"n": "Gumayusi", "k": 398, "g": 88, "kda": 6.02}, {"n": "Caps", "k": 336, "g": 101, "kda": 3.21}, {"n": "Xiaohu", "k": 332, "g": 109, "kda": 4.12}, {"n": "JackeyLove", "k": 325, "g": 77, "kda": 3.8}, {"n": "Perkz", "k": 316, "g": 86, "kda": 3.45}, {"n": "Canyon", "k": 313, "g": 101, "kda": 5.11}, {"n": "ShowMaker", "k": 309, "g": 83, "kda": 5.96}], "teams": [{"n": "T1", "g": 157, "w": 115, "wr": 73.2, "a": "antes SK Telecom T1"}, {"n": "Gen.G", "g": 146, "w": 97, "wr": 66.4, "a": "antes Samsung White, Blue y Galaxy"}, {"n": "Fnatic", "g": 112, "w": 57, "wr": 50.9, "a": null}, {"n": "Royal Never Give Up", "g": 94, "w": 55, "wr": 58.5, "a": "antes Royal Club"}, {"n": "Dplus Kia", "g": 83, "w": 55, "wr": 66.3, "a": "antes DAMWON Gaming y DWG KIA"}, {"n": "Cloud9", "g": 103, "w": 51, "wr": 49.5, "a": null}, {"n": "G2 Esports", "g": 101, "w": 49, "wr": 48.5, "a": null}, {"n": "EDward Gaming", "g": 87, "w": 47, "wr": 54.0, "a": null}, {"n": "KT Rolster", "g": 49, "w": 31, "wr": 63.3, "a": null}, {"n": "Bilibili Gaming", "g": 46, "w": 26, "wr": 56.5, "a": null}], "legends": [{"y": 2016, "t": "Semifinal · SK Telecom T1 3–2 ROX Tigers", "b": "202", "u": "minutos en cinco partidas", "d": "ROX llegaba de ganarle a SKT la final de la LCK de verano. Fue la única vez que alguien llevó a ese SKT al quinto mapa antes de la final."}, {"y": 2016, "t": "Final · SK Telecom T1 3–2 Samsung Galaxy", "b": "253", "u": "minutos, la serie más larga registrada", "d": "Samsung venía de entrar por la última plaza de Corea. SKT levantó su tercera copa después de cuatro horas y cuarto de juego."}, {"y": 2017, "t": "Cuartos · Team WE 3–2 Cloud9", "b": "−5.292", "u": "de oro abajo al minuto 15", "d": "La mayor remontada registrada: Team WE dio vuelta ese déficit y cerró la partida a los 54 minutos."}, {"y": 2022, "t": "Final · DRX 3–2 T1", "b": "180", "u": "minutos para la mayor sorpresa", "d": "DRX entró al torneo desde el play-in, la peor semilla posible, y terminó ganándole la final a T1."}], "dropped": 90};
+const DD="https://ddragon.leagueoflegends.com/cdn/img/champion/";
+const FIX={"Kai'Sa":"Kaisa","Kha'Zix":"Khazix","K'Sante":"KSante","LeBlanc":"Leblanc","Cho'Gath":"Chogath",
+ "Vel'Koz":"Velkoz","Rek'Sai":"RekSai","Bel'Veth":"Belveth","Nunu & Willump":"Nunu","Renata Glasc":"Renata",
+ "Wukong":"MonkeyKing","Dr. Mundo":"DrMundo"};
+const cid=n=>FIX[n]||n.replace(/[^A-Za-z]/g,'');
+const crest=t=>"https://lol.fandom.com/wiki/Special:Redirect/file/"+encodeURIComponent(t.replace(/ /g,'_')+"logo_square.png");
+const mono=t=>t.split(/\s+/).map(w=>w[0]).join('').slice(0,3).toUpperCase();
+const nf=n=>n.toLocaleString('es-AR');
+
+/* ── tooltip único ────────────────────── */
+const tip=document.createElement('div');tip.className='tip';document.body.appendChild(tip);
+function bind(el,html){
+  el.addEventListener('pointerenter',()=>{tip.innerHTML=html;tip.classList.add('on')});
+  el.addEventListener('pointermove',e=>{tip.style.left=e.clientX+'px';tip.style.top=e.clientY+'px'});
+  el.addEventListener('pointerleave',()=>tip.classList.remove('on'));
+}
+function lazyImg(src,cls){const i=new Image();i.loading='lazy';i.decoding='async';i.alt='';
+ if(cls)i.className=cls;i.onload=()=>i.classList.add('on');i.src=src;return i}
+
+const E=[
+ {y:2011,c:"Fnatic",r:"Europa",vs:"against All authority",s:"2–1",city:"Jönköping, Suecia",v:"DreamHack Summer",mvp:null,p:100000,t:8,ch:"Alistar"},
+ {y:2012,c:"Taipei Assassins",r:"Taiwán",vs:"Azubu Frost",s:"3–1",city:"Los Ángeles",v:"Galen Center",mvp:null,p:2000000,t:12,ch:"Shen"},
+ {y:2013,c:"SK Telecom T1",r:"Corea",vs:"Royal Club",s:"3–0",city:"Los Ángeles",v:"Staples Center",mvp:null,p:2050000,t:14,ch:"Zed"},
+ {y:2014,c:"Samsung White",r:"Corea",vs:"Star Horn Royal Club",s:"3–1",city:"Seúl",v:"Estadio Sangam",mvp:"Mata",p:2130000,t:16,ch:"Thresh"},
+ {y:2015,c:"SK Telecom T1",r:"Corea",vs:"KOO Tigers",s:"3–1",city:"Berlín",v:"Mercedes-Benz Arena",mvp:"MaRin",p:2130000,t:16,ch:"Kalista"},
+ {y:2016,c:"SK Telecom T1",r:"Corea",vs:"Samsung Galaxy",s:"3–2",city:"Los Ángeles",v:"Staples Center",mvp:"Faker",p:5070000,t:16,ch:"Jhin"},
+ {y:2017,c:"Samsung Galaxy",r:"Corea",vs:"SK Telecom T1",s:"3–0",city:"Pekín",v:"Estadio Nacional",mvp:"Ruler",p:4950000,t:24,ch:"Galio"},
+ {y:2018,c:"Invictus Gaming",r:"China",vs:"Fnatic",s:"3–0",city:"Incheon",v:"Estadio Munhak",mvp:"Ning",p:6450000,t:24,ch:"Aatrox"},
+ {y:2019,c:"FunPlus Phoenix",r:"China",vs:"G2 Esports",s:"3–0",city:"París",v:"AccorHotels Arena",mvp:"Tian",p:2220000,t:24,ch:"Pantheon"},
+ {y:2020,c:"DAMWON Gaming",r:"Corea",vs:"Suning",s:"3–1",city:"Shanghái",v:"Estadio Pudong",mvp:"Canyon",p:2340000,t:22,ch:"Nidalee"},
+ {y:2021,c:"EDward Gaming",r:"China",vs:"DWG KIA",s:"3–2",city:"Reikiavik",v:"Laugardalshöll",mvp:"Scout",p:2230000,t:22,ch:"Graves"},
+ {y:2022,c:"DRX",r:"Corea",vs:"T1",s:"3–2",city:"San Francisco",v:"Chase Center",mvp:"Kingen",p:2250000,t:24,ch:"Aatrox"},
+ {y:2023,c:"T1",r:"Corea",vs:"Weibo Gaming",s:"3–0",city:"Seúl",v:"Gocheok Sky Dome",mvp:"Zeus",p:2225000,t:22,ch:"Orianna"},
+ {y:2024,c:"T1",r:"Corea",vs:"Bilibili Gaming",s:"3–2",city:"Londres",v:"O2 Arena",mvp:"Faker",p:2250000,t:20,ch:"Yone"},
+ {y:2025,c:"T1",r:"Corea",vs:"KT Rolster",s:"3–2",city:"Chengdu",v:"final en Chengdu",mvp:"Gumayusi",p:5000000,t:17,ch:"Yunara"}
+];
+document.getElementById('heroBg').style.backgroundImage=`url(${DD}splash/Azir_0.jpg)`;
+const rail=document.getElementById('rail'),ed=document.getElementById('ed');
+E.forEach((e,i)=>{const b=document.createElement('button');b.className='yr'+(e.y<2014?' pre':'');
+ b.textContent=e.y;b.setAttribute('role','tab');b.setAttribute('aria-selected',i===E.length-1);
+ b.onclick=()=>pick(i);rail.appendChild(b)});
+function pick(i){const e=E[i];
+ [...rail.children].forEach((b,j)=>b.setAttribute('aria-selected',j===i));
+ ed.innerHTML=`<div class="art" style="background-image:url(${DD}splash/${cid(e.ch)}_0.jpg)"></div><div class="ed-in">
+  <div class="ed-top"><div class="ed-id">
+    <div class="crest"><img src="${crest(e.c)}" alt="" onerror="this.parentNode.innerHTML='<span>${mono(e.c)}</span>'"></div>
+    <div><div class="ed-champ">${e.c}</div><div class="badge">${e.r}</div></div></div>
+   <div class="ed-year">${e.y}</div></div>
+  <dl class="ed-grid">
+   <div><dt>FINALISTA</dt><dd>${e.vs} &nbsp;·&nbsp; ${e.s}</dd></div>
+   <div><dt>SEDE DE LA FINAL</dt><dd>${e.city}<br><span style="font-size:.88rem;color:var(--text)">${e.v}</span></dd></div>
+   <div><dt>MVP DE LA FINAL</dt><dd>${e.mvp||'sin registro'}</dd></div>
+   <div><dt>PREMIO TOTAL</dt><dd>US$ ${nf(e.p)}</dd></div>
+   <div><dt>EQUIPOS</dt><dd>${e.t}</dd></div></dl></div>`;}
+pick(E.length-1);
+
+/* ── carrusel ─────────────────────────── */
+let ci=S.byyear.length-1;
+const dots=document.getElementById('dots'),trio=document.getElementById('trio');
+S.byyear.forEach((r,i)=>{const b=document.createElement('button');b.setAttribute('aria-label',r.y);
+ b.onclick=()=>{ci=i;drawC()};dots.appendChild(b)});
+function drawC(){
+  const r=S.byyear[ci];
+  document.getElementById('cy').textContent=r.y;
+  document.getElementById('cg2').textContent=r.games+' partidas disputadas';
+  [...dots.children].forEach((b,i)=>b.setAttribute('aria-current',i===ci));
+  trio.innerHTML='';
+  r.top.forEach(c=>{
+    const a=document.createElement('article');a.className='ch';
+    const pic=document.createElement('div');pic.className='pic';pic.appendChild(lazyImg(`${DD}loading/${cid(c.c)}_0.jpg`));
+    const body=document.createElement('div');body.className='body';
+    body.innerHTML=`<h4>${c.c}</h4><div class="pc">${c.pct}%</div>
+      <p>${c.pick} jugadas · ${c.ban} baneos${c.pick>=8?` · ${c.wr}% victorias`:''}</p>
+      <div class="tag">${c.pick<=5?'<i>BAN OBLIGATORIO</i>':'&nbsp;'}</div>`;
+    a.append(pic,body);
+    bind(a,`<b>${c.c}</b><small>Presente en <em>${c.pct}%</em> de las ${r.games} partidas de ${r.y}</small>
+      <small>${c.pick} veces elegido · ${c.ban} veces baneado</small>`);
+    trio.appendChild(a);
+  });
+  trio.classList.remove('swap');void trio.offsetWidth;trio.classList.add('swap');
+}
+document.getElementById('prev').onclick=()=>{ci=(ci-1+S.byyear.length)%S.byyear.length;drawC()};
+document.getElementById('next').onclick=()=>{ci=(ci+1)%S.byyear.length;drawC()};
+drawC();
+
+/* ── grilla de presencia ──────────────── */
+const pres=document.getElementById('pres');
+S.champs.forEach((c,i)=>{
+  const d=document.createElement('div');d.className='tile';
+  d.appendChild(lazyImg(`${DD}loading/${cid(c.c)}_0.jpg`));
+  d.insertAdjacentHTML('beforeend',`<div class="lay"></div><div class="rk">${i+1}</div>
+   <div class="txt"><b>${c.pct}%</b><span>${c.c}</span><small>${c.wr}% de victorias</small></div>`);
+  bind(d,`<b>${c.c}</b><small>Presente en <em>${c.pct}%</em> de las ${nf(S.games)} partidas</small>
+   <small>${c.pick} veces elegido · ${c.ban} veces baneado</small><small>Ganó el ${c.wr}% de las que jugó</small>`);
+  pres.appendChild(d);
+});
+
+/* ── objetivos ────────────────────────── */
+const ICONS={
+ 'Primera sangre':'<path d="M19 3C19 3 8 17 8 24a11 11 0 0 0 22 0c0-7-11-21-11-21z" fill="#C6404A" opacity=".85"/>',
+ 'Primer dragón':'<path d="M4 20l12-9 4 6 4-6 10 9-9 3-5-4-5 4z" fill="#C8AA6E"/><circle cx="19" cy="27" r="4" fill="#0AC8B9"/>',
+ 'Primera torre':'<path d="M12 34V16l7-9 7 9v18z" fill="#C8AA6E" opacity=".9"/><rect x="15" y="20" width="8" height="8" fill="#010A13"/>',
+ 'Primer barón':'<path d="M19 4c8 0 13 6 13 13 0 7-6 9-6 14h-14c0-5-6-7-6-14C6 10 11 4 19 4z" fill="#7B4FA8" opacity=".9"/><circle cx="14" cy="17" r="2.6" fill="#F0E6D2"/><circle cx="24" cy="17" r="2.6" fill="#F0E6D2"/>'};
+const DESC={'Primera sangre':'El primer asesinato de la partida','Primer dragón':'El primer drake asegurado',
+ 'Primera torre':'La primera torreta derribada','Primer barón':'El primer Barón Nashor'};
+document.getElementById('objs').innerHTML=S.obj.map(o=>{
+  const C=2*Math.PI*52, off=C*(1-o.wr/100);
+  return `<div class="obj"><div class="ring">
+   <svg viewBox="0 0 118 118" width="118" height="118">
+    <circle cx="59" cy="59" r="52" fill="none" stroke="rgba(120,90,40,.25)" stroke-width="5"/>
+    <circle cx="59" cy="59" r="52" fill="none" stroke="#C8AA6E" stroke-width="5" stroke-linecap="round"
+     stroke-dasharray="${C}" stroke-dashoffset="${C}" data-off="${off}" style="transition:stroke-dashoffset 1.3s cubic-bezier(.2,.7,.3,1)"/></svg>
+   <div class="ic"><svg viewBox="0 0 38 38">${ICONS[o.k]||''}</svg></div></div>
+   <b>${o.wr}%</b><h3>${o.k}</h3><p>${DESC[o.k]} · ${nf(o.n)} casos</p></div>`}).join('');
+
+/* ── rankings ─────────────────────────── */
+const tp=document.getElementById('tp'),mk=S.players[0].k;
+S.players.forEach((p,i)=>{const r=document.createElement('div');r.className='row';
+ r.innerHTML=`<div class="pos">${i+1}</div><div class="who"><div><div class="nm">${p.n}</div>
+  <div class="mt">${p.g} partidas · KDA ${p.kda}</div><div class="mini"><i data-w="${p.k/mk*100}"></i></div></div></div>
+  <div class="val"><b>${nf(p.k)}</b><small>KILLS</small></div>`;
+ bind(r,`<b>${p.n}</b><small><em>${nf(p.k)}</em> kills en ${p.g} partidas de Worlds</small><small>KDA acumulado ${p.kda}</small>`);
+ tp.appendChild(r)});
+const tt=document.getElementById('tt'),mw=S.teams[0].w;
+S.teams.forEach((t,i)=>{const r=document.createElement('div');r.className='row';
+ r.innerHTML=`<div class="pos">${i+1}</div><div class="who">
+  <div class="crest sm"><img src="${crest(t.n)}" alt="" loading="lazy" onerror="this.parentNode.innerHTML='<span>${mono(t.n)}</span>'"></div>
+  <div style="min-width:0"><div class="nm">${t.n}</div><div class="mt">${t.g} partidas · ${t.wr}% victorias${t.a?" · "+t.a:""}</div>
+  <div class="mini"><i data-w="${t.w/mw*100}"></i></div></div></div>
+  <div class="val"><b>${t.w}</b><small>GANADAS</small></div>`;
+ bind(r,`<b>${t.n}</b><small><em>${t.w}</em> victorias en ${t.g} partidas</small><small>Winrate histórico ${t.wr}%</small>${t.a?`<small>Incluye el linaje completo: ${t.a}</small>`:''}`);
+ tt.appendChild(r)});
+
+document.getElementById('legends').innerHTML=S.legends.map(l=>
+ `<div class="lg"><div class="y">WORLDS ${l.y}</div><h3>${l.t}</h3><b>${l.b}</b><div class="u">${l.u}</div><p>${l.d}</p></div>`).join('');
+
+const R=S.rec;
+document.getElementById('recs').innerHTML=`
+ <div class="rec"><b>${String(R.long.min).replace('.',',')} min</b><span>La más larga de la historia: ${R.long.w} venció a ${R.long.l} en ${R.long.y}.</span></div>
+ <div class="rec"><b>${String(R.short.min).replace('.',',')} min</b><span>La más corta: ${R.short.w} liquidó a ${R.short.l} en ${R.short.y}.</span></div>
+ <div class="rec"><b>${String(R.avg).replace('.',',')} min</b><span>El promedio de las 1.251 partidas registradas.</span></div>`;
+
+/* ── animación de entrada por sección ─── */
+const io=new IntersectionObserver(es=>es.forEach(x=>{if(!x.isIntersecting)return;
+ x.target.querySelectorAll('[data-w]').forEach(n=>n.style.width=n.dataset.w+'%');
+ x.target.querySelectorAll('[data-off]').forEach(n=>n.style.strokeDashoffset=n.dataset.off);
+ io.unobserve(x.target)}),{threshold:.15});
+document.querySelectorAll('section').forEach(s=>io.observe(s));
+setTimeout(()=>{document.querySelectorAll('[data-w]').forEach(n=>{if(!n.style.width)n.style.width=n.dataset.w+'%'});
+ document.querySelectorAll('[data-off]').forEach(n=>{if(!n.style.strokeDashoffset)n.style.strokeDashoffset=n.dataset.off})},2200);
+
+/* ── gráficos ─────────────────────────── */
+function svgTip(el,html){bind(el,html)}
+(function line(){
+  const data=S.length,W=900,H=300,P={t:20,r:24,b:36,l:56};
+  const xs=i=>P.l+i*(W-P.l-P.r)/(data.length-1);
+  const lo=Math.min(...data.map(d=>d.min))-2,hi=Math.max(...data.map(d=>d.min))+2;
+  const ys=v=>H-P.b-(v-lo)/(hi-lo)*(H-P.t-P.b);
+  let g='<defs><linearGradient id="lg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#C8AA6E"/><stop offset="100%" stop-color="#C8AA6E" stop-opacity="0"/></linearGradient></defs>';
+  for(let k=Math.ceil(lo/2)*2;k<=hi;k+=2) g+=`<line x1="${P.l}" y1="${ys(k)}" x2="${W-P.r}" y2="${ys(k)}" stroke="rgba(120,90,40,.16)"/><text x="${P.l-12}" y="${ys(k)+5}" fill="#7A7469" font-size="13" text-anchor="end">${k}</text>`;
+  const pts=data.map((d,i)=>`${xs(i)},${ys(d.min)}`).join(' ');
+  g+=`<polygon points="${pts} ${xs(data.length-1)},${H-P.b} ${P.l},${H-P.b}" fill="url(#lg)" opacity=".2"/><polyline points="${pts}" fill="none" stroke="#C8AA6E" stroke-width="2.4"/>`;
+  data.forEach((d,i)=>{g+=`<circle cx="${xs(i)}" cy="${ys(d.min)}" r="4.5" fill="#010A13" stroke="#C8AA6E" stroke-width="2"/>
+   <circle class="hot" data-t="${encodeURIComponent(`<b>Worlds ${d.y}</b><small>Duración promedio <em>${String(d.min).replace('.',',')} min</em></small><small>${d.n} partidas registradas</small>`)}" cx="${xs(i)}" cy="${ys(d.min)}" r="16" fill="transparent" style="cursor:pointer"/>
+   <text x="${xs(i)}" y="${H-P.b+22}" fill="#7A7469" font-size="13" text-anchor="middle">${String(d.y).slice(2)}</text>`});
+  document.getElementById('len').innerHTML=g;
+})();
+(function blue(){
+  const d=S.blue,W=780,H=300,P={t:34,r:16,b:36,l:52},lo=44,hi=62;
+  const bw=(W-P.l-P.r)/d.length, ys=v=>H-P.b-(v-lo)/(hi-lo)*(H-P.t-P.b);
+  let g='';
+  for(let k=45;k<=60;k+=5) g+=`<line x1="${P.l}" y1="${ys(k)}" x2="${W-P.r}" y2="${ys(k)}" stroke="rgba(120,90,40,.13)"/><text x="${P.l-12}" y="${ys(k)+5}" fill="#7A7469" font-size="13" text-anchor="end">${k}%</text>`;
+  d.forEach((r,i)=>{const cx=P.l+bw*i+bw/2, up=r.wr>=50, h=Math.abs(ys(50)-ys(r.wr));
+    g+=`<rect x="${cx-bw*.3}" y="${up?ys(r.wr):ys(50)}" width="${bw*.6}" height="${Math.max(h,1)}" fill="${up?'#0AC8B9':'#C6404A'}" opacity=".62"/>
+     <text x="${cx}" y="${up?ys(r.wr)-9:ys(r.wr)+19}" fill="${up?'#0AC8B9':'#C6404A'}" font-size="12.5" text-anchor="middle">${String(r.wr).replace('.',',')}</text>
+     <rect class="hot" data-t="${encodeURIComponent(`<b>Worlds ${r.y}</b><small>Lado azul: <em>${r.wr}%</em></small><small>${r.n} partidas disputadas</small>`)}" x="${cx-bw/2}" y="${P.t}" width="${bw}" height="${H-P.t-P.b}" fill="transparent" style="cursor:pointer"/>
+     <text x="${cx}" y="${H-P.b+22}" fill="#7A7469" font-size="13" text-anchor="middle">${String(r.y).slice(2)}</text>`});
+  g+=`<line x1="${P.l}" y1="${ys(50)}" x2="${W-P.r}" y2="${ys(50)}" stroke="#F0E6D2" stroke-width="1.6"/>
+   <text x="${P.l-12}" y="${ys(50)+5}" fill="#F0E6D2" font-size="13" text-anchor="end">50%</text>`;
+  document.getElementById('blue').innerHTML=g;
+})();
+(function pool(){
+  const W=620,H=300,P={t:20,r:14,b:36,l:60},mx=Math.max(...E.map(e=>e.p));
+  const bw=(W-P.l-P.r)/E.length, ys=v=>H-P.b-v/mx*(H-P.t-P.b);
+  let g='<defs><linearGradient id="pg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#F0E6D2"/><stop offset="100%" stop-color="#785A28"/></linearGradient></defs>';
+  for(let k=0;k<=6;k+=2){const v=k*1e6;
+    g+=`<line x1="${P.l}" y1="${ys(v)}" x2="${W-P.r}" y2="${ys(v)}" stroke="rgba(120,90,40,.15)"/><text x="${P.l-10}" y="${ys(v)+5}" fill="#7A7469" font-size="13" text-anchor="end">${k} M</text>`}
+  E.forEach((e,i)=>{const cx=P.l+bw*i+bw/2;
+    g+=`<rect x="${cx-bw*.32}" y="${ys(e.p)}" width="${bw*.64}" height="${H-P.b-ys(e.p)}" fill="url(#pg)" opacity=".85"/>
+     <rect class="hot" data-t="${encodeURIComponent(`<b>Worlds ${e.y}</b><small>Premio total <em>US$ ${nf(e.p)}</em></small><small>${e.t} equipos · ${e.city}</small>`)}" x="${cx-bw/2}" y="${P.t}" width="${bw}" height="${H-P.t-P.b}" fill="transparent" style="cursor:pointer"/>
+     <text x="${cx}" y="${H-P.b+22}" fill="#7A7469" font-size="12" text-anchor="middle">${String(e.y).slice(2)}</text>`});
+  document.getElementById('pool').innerHTML=g;
+})();
+document.querySelectorAll('.hot').forEach(n=>bind(n,decodeURIComponent(n.dataset.t)));
+
+/* ── mapa ─────────────────────────────── */
+const CITIES=[
+ [57.78,14.16,"Jönköping",[2011]],[34.02,-118.28,"Los Ángeles",[2012,2013,2016]],[37.50,126.80,"Seúl e Incheon",[2014,2018,2023],[134.5,41.5]],
+ [52.51,13.44,"Berlín",[2015]],[39.99,116.39,"Pekín",[2017]],[48.84,2.38,"París",[2019]],
+ [31.19,121.55,"Shanghái",[2020]],[64.14,-21.90,"Reikiavik",[2021]],[37.77,-122.39,"San Francisco",[2022]],
+ [51.50,-0.00,"Londres",[2024]],[30.57,104.06,"Chengdu",[2025]]];
+const WIN={kr:["Corea del Sur",10,"T1 seis veces, Samsung dos, DAMWON y DRX una cada uno"],
+ cn:["China",3,"Invictus Gaming, FunPlus Phoenix y EDward Gaming"],
+ tw:["Taiwán",1,"Taipei Assassins en 2012"],gb:["Reino Unido",1,"Fnatic en 2011"]};
+const BYID={"410":"kr","156":"cn","158":"tw","826":"gb"};
+const BYNAME={"South Korea":"kr","Republic of Korea":"kr","Korea, Rep.":"kr","Korea":"kr","S. Korea":"kr",
+ "China":"cn","People's Republic of China":"cn","Taiwan":"tw","United Kingdom":"gb"};
+function winOf(d){const k=BYID[String(d.id)]||BYNAME[(d.properties||{}).name];return k?WIN[k]:null}
+function winOf(d){const k=BYID[String(d.id)]||BYNAME[(d.properties||{}).name];return k?WIN[k]:null}
+(async function(){try{
+  if(!window.d3||!window.topojson) throw 0;
+  const world=await d3.json("https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json");
+  const land=topojson.feature(world,world.objects.countries), svg=d3.select("#map");
+  const proj=d3.geoNaturalEarth1().fitExtent([[10,14],[950,416]],land), path=d3.geoPath(proj);
+  svg.append("path").attr("class","grat").attr("d",path(d3.geoGraticule10()));
+  svg.append("g").selectAll("path").data(land.features).join("path")
+    .attr("d",path).attr("class",d=>winOf(d)?"land hl":"land")
+    .attr("fill",d=>winOf(d)?"#C8AA6E":null)
+    .attr("fill-opacity",d=>{const w=winOf(d);return w?Math.min(.32+w[1]*.07,.94):null})
+    .each(function(d){const w=winOf(d);if(w)bind(this,`<b>${w[0]}</b><small><em>${w[1]} ${w[1]>1?'títulos':'título'}</em> de Worlds</small><small>${w[2]}</small>`)});
+  const pt=svg.append("g");
+  CITIES.forEach(([la,lo,n,ys,off])=>{const [tx,ty]=proj([lo,la]);
+    const [x,y]=off?proj(off):[tx,ty];
+    if(off){pt.append("circle").attr("cx",tx).attr("cy",ty).attr("r",1.7).attr("fill","#0AC8B9").attr("opacity",".9");
+      pt.append("line").attr("x1",tx).attr("y1",ty).attr("x2",x).attr("y2",y)
+        .attr("stroke","#0AC8B9").attr("stroke-width",.9).attr("opacity",".55")}
+    const c=pt.append("circle").attr("class","city").attr("cx",x).attr("cy",y).attr("r",3.8).attr("stroke","#021019").attr("stroke-width",.8).node();
+    const hit=pt.append("circle").attr("cx",x).attr("cy",y).attr("r",15).attr("fill","transparent").style("cursor","pointer").node();
+    const list=ys.map(yy=>{const e=E.find(z=>z.y===yy);return `${yy} · ${e.c} venció a ${e.vs}`}).join('<br>');
+    bind(hit,`<b>${n}</b><small><em>${ys.length===1?'Una final':ys.length+' finales'}</em></small><small>${list}</small>`);
+    hit.addEventListener('pointerenter',()=>c.setAttribute('r',6.6));
+    hit.addEventListener('pointerleave',()=>c.setAttribute('r',3.8));
+  });
+  const [nx,ny]=proj([-73.97,40.68]);
+  pt.append("circle").attr("class","city26").attr("cx",nx).attr("cy",ny).attr("r",6.4);
+  pt.append("circle").attr("cx",nx).attr("cy",ny).attr("r",6).attr("fill","none").attr("stroke","#F0E6D2").attr("stroke-width",1.3)
+    .append("animate").attr("attributeName","r").attr("values","6;18;6").attr("dur","2.6s").attr("repeatCount","indefinite");
+  const nh=pt.append("circle").attr("cx",nx).attr("cy",ny).attr("r",16).attr("fill","transparent").style("cursor","pointer").node();
+  bind(nh,`<b>Brooklyn, Nueva York</b><small><em>La final de 2026</em> en el Barclays Center</small><small>14 de noviembre · 19 equipos en juego</small>`);
+}catch(e){document.getElementById('mapbox').innerHTML='<div class="mapfall">No se pudo cargar la geometría del mapa desde la red. El resto del tablero funciona igual.</div>'}})();
+
+/* ── cuenta regresiva con segundos ────── */
+const T=new Date('2026-10-15T13:00:00-07:00');
+const el={dd:document.getElementById('dd'),hh:document.getElementById('hh'),mm:document.getElementById('mm'),ss:document.getElementById('ss')};
+function tick(){const s=Math.max(0,Math.floor((T-new Date())/1000));
+ el.dd.textContent=Math.floor(s/86400);
+ el.hh.textContent=String(Math.floor(s/3600)%24).padStart(2,'0');
+ el.mm.textContent=String(Math.floor(s/60)%60).padStart(2,'0');
+ el.ss.textContent=String(s%60).padStart(2,'0');
+ requestAnimationFrame(()=>{});}
+tick();setInterval(tick,1000);
+</script></body></html>
